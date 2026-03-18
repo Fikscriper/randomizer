@@ -1,0 +1,13 @@
+.center
+{
+    text-align: center;
+}
+
+.link
+{
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    font-size: 200%;
+    font-weight: 600;
+}
