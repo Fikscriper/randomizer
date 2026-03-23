@@ -2,12 +2,23 @@
 {
     text-align: center;
 }
+.center:active
+{
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
 
 .link
 {
     display: block;
     text-decoration: none;
     color: inherit;
-    font-size: 200%;
+    font-size: 170%;
     font-weight: 600;
+
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.link:hover
+{
+    font-size: 200%;
 }
