@@ -3,28 +3,49 @@
         <head>
             <link rel="stylesheet" href="./statuse/collorized.css">
             <link rel="stylesheet" href="./statuse/global.css">
-            
-            <a href="./main.html" class="link">
-            <h2 class="center">Main</h2>
-            </a>
+            <link rel="stylesheet" href="./statuse/burger_menu.css">  
+
         </head>
       
         <body class="main">
+
+            <header style="padding: 50px;">
+                <input id="burger" type="checkbox" />
+                <label for="burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            <nav>
+                <a href="./main.html" class="link">Main</a>
+                <ul>
+                    <li><a class="link" href="./rand_num.html">Рандомайзер чисел</a></li>
+                    <li><a class="link" href="./rand_wheel.html">Колесо фартуны</a></li>
+                    <li><a class="link" href="./rand_coin.html">Орел и Решка</a></li>
+                    <li><a class="link" href="./rand_dice.html">Кости</a></li>
+                </ul>
+            </nav>
+    
+            </header>
+
             <h2>Рандомайзер чисел</h2>
 
             <div class="rand_num">
-                <label>От: <input type="number" id="min" value="1"></label>
-                <label>До: <input type="number" id="max" value="100"></label>
+                <label>От: <input class="button" type="number" id="min" value="1"></label>
+                <label>До: <input class="button" type="number" id="max" value="100"></label>
 
                 <button class="button" id="genNum">Сгенерировать</button>
-                <p>Результат: <span id="resultNum">-</span></p>
+                <p style="font-size: 200%;">Результат: <span id="resultNum" style="position: static; display: inline-block;">-</span></p>
 
             </div>
+
+            <footer>
+                <p>Контакты: Fiks.criper@gmail.com</p>
+            </footer>
+
         </body>
 
-        <footer>
-            <p>Контакты: Fiks.criper@gmail.com</p>
-        </footer>
+       
         <script src="js/random_num.js"></script>
 
  </html>

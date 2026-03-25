@@ -8,8 +8,14 @@ function generateNum()
    let min = Number(minim.value);
    let max = Number(maxim.value);
 
+   if (min > max) 
+   {
+    [min, max] = [max, min]
+   }
+
    const RandNum = Math.floor(Math.random() * (max - min + 1)) + min;
     result.textContent = RandNum;
+    minim.
 
     console.log(min, max, RandNum);
 }

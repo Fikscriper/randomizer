@@ -50,7 +50,7 @@
   }
   
   input ~ nav {
-    background: black;
+    background: linear-gradient(0deg, rgba(17, 54, 11, 1) 0%, rgba(28, 87, 53, 1) 48%, rgba(28, 92, 91, 1) 100%);
     position: fixed;
     top: 0;
     left: 0;
