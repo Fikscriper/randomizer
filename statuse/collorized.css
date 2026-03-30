@@ -24,6 +24,11 @@ input::-webkit-inner-spin-button {
     padding: 25px;
     border-radius: 5%;
 }
+.section_menus
+{
+    display: flex;
+    justify-content: center;
+}
 
 
 .list
@@ -74,15 +79,3 @@ input::-webkit-inner-spin-button {
     transform: scale(0.95);
     transition: transform 0.1s ease;
 }
-
-.button-icon
-{
-    position: absolute;
-    margin-left: -450px;
-    margin-top: 10px;
-
-    filter: invert(100%);
-
-
-}
-

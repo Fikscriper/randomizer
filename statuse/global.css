@@ -13,12 +13,12 @@
     display: block;
     text-decoration: none;
     color: inherit;
-    font-size: 170%;
+    font-size: 27px;
     font-weight: 600;
 
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .link:hover
 {
-    font-size: 200%;
+    transform: scale(1.1); 
 }
