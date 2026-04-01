@@ -30,11 +30,41 @@ input::-webkit-inner-spin-button {
     justify-content: center;
 }
 
+.menus_void
+{
+    position: relative;
+    text-align: center;
+    
+
+    max-width: 500px;
+    margin-top: 100px;
+    margin-left: auto; margin-right: auto;
+    padding: 25px;
+    border-radius: 5%;
+}
+
 
 .list
 {
     position: relative;
     background: linear-gradient(0deg, rgba(17, 54, 11, 1) 0%, rgba(28, 87, 53, 1) 60%);
+
+    text-shadow: 1px 1px 15px rgba(0,0,0,0.5);
+    text-align: center;
+    border: 1px solid black;
+    
+    
+
+
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 30%;
+}
+
+.list_void
+{
+    position: relative;
 
     text-shadow: 1px 1px 15px rgba(0,0,0,0.5);
     text-align: center;
@@ -78,4 +108,21 @@ input::-webkit-inner-spin-button {
 {
     transform: scale(0.95);
     transition: transform 0.1s ease;
+}
+
+
+/* Стиль для выпадающего меню */
+.select
+{
+    background: linear-gradient(358deg, rgba(25, 82, 16, 1) 0%, rgba(36, 115, 69, 1) 57%);
+    color: #2c3e50;
+    border: none;
+    padding: 10px 20px;
+}
+.select:hover 
+{
+    transform: scale(1.02);
+}
+#select:active {
+    transform: scale(0.98);
 }
