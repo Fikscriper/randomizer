@@ -1,0 +1,37 @@
+.coin {
+    transition: transform 0.1s linear;
+}
+
+.coin-tossing {
+    animation: tossUp 0.4s cubic-bezier(0.4, 0.0, 0.6, 1.0),
+               tossDown 0.4s cubic-bezier(0.4, 0.0, 0.6, 1.0) 0.4s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes tossUp {
+    0% {
+        transform: translateY(0) rotateY(0deg);
+    }
+    100% {
+        transform: translateY(-180px) rotateY(1080deg);
+    }
+}
+
+@keyframes tossDown {
+    0% {
+        transform: translateY(-180px) rotateY(1080deg);
+    }
+    100% {
+        transform: translateY(0) rotateY(2160deg);
+    }
+}
+
+/* Эффект "пружинки" при приземлении */
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(0.85); }
+}
+
+.coin-bounce {
+    animation: bounce 0.15s ease-in-out;
+}
