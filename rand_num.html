@@ -29,15 +29,20 @@
     
             </header>
 
-            <h2>Рандомайзер чисел</h2>
+            <h2 class="title">Рандомайзер чисел</h2>
+            <div class="menus_void">
 
-            <div class="rand_num">
-                <label>От: <input class="button" type="number" id="min" value="1"></label>
-                <label>До: <input class="button" type="number" id="max" value="100"></label>
+                <div style="transform: scale(1.5); justify-self: center; padding: 30px;">
+                    <label>От: <input class="button" type="number" id="min" value="1"></label>
+                    <p></p>
+                    <label>До: <input class="button" type="number" id="max" value="100"></label>
+                </div>
 
-                <button class="button" id="genNum">Сгенерировать</button>
-                <p style="font-size: 200%;">Результат: <span id="resultNum" style="position: static; display: inline-block;">-</span></p>
+                <div style="justify-self: center; transform: scale(1.8);">
+                    <button class="button" id="genNum">Сгенерировать</button>
+                </div>
 
+                <p class="result">Результат: <span id="resultNum" class="result">-</span></p>                
             </div>
 
             <footer>

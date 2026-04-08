@@ -22,3 +22,21 @@
 {
     transform: scale(1.1); 
 }
+
+.result
+{
+    font-size: 50px;
+
+}
+
+.title
+{
+    justify-self: center;
+    font-size: 50px;
+}
+
+.result
+{
+    position: static; 
+    display: inline-block;
+}
