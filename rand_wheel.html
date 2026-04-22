@@ -1,65 +1,61 @@
 <!DOCTYPE html>
-    <html lang = "ru">
-        <head>
-            <link rel="stylesheet" href="./statuse/collorized.css">
-            <link rel="stylesheet" href="./statuse/global.css">
-            <link rel="stylesheet" href="./statuse/burger_menu.css">
-            <link rel="stylesheet" href="./statuse/wheel.css"> 
-            <link rel="stylesheet" href="./statuse/dice.css">
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="./statuse/collorized.css">
+    <link rel="stylesheet" href="./statuse/global.css">
+    <link rel="stylesheet" href="./statuse/burger_menu.css">
+    <link rel="stylesheet" href="./statuse/wheel.css"> 
+    <link rel="stylesheet" href="./statuse/dice.css">
+    <title>Колесо фортуны</title>
+</head>
+  
+<body class="main">
 
-            <title>Wheel</title>
-        </head>
-      
-        <body class="main">
-
-            <header style="padding: 50px;">
-                <input id="burger" type="checkbox" />
-                <label for="burger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>
-            <nav>
-                <a href="./main.html" class="link">Main</a>
-                <ul>
-                    <li><a class="link" href="./rand_num.html">Рандомайзер чисел</a></li>
-                    <li><a class="link" href="./rand_wheel.html">Колесо фартуны</a></li>
-                    <li><a class="link" href="./rand_coin.html">Орел и Решка</a></li>
-                    <li><a class="link" href="./rand_dice.html">Кости</a></li>
-                </ul>
-            </nav>
+    <header style="padding: 50px;">
+        <input id="burger" type="checkbox" />
+        <label for="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <nav>
+            <a href="./main.html" class="link">Main</a>
+            <ul>
+                <li><a class="link" href="./rand_num.html">Рандомайзер чисел</a></li>
+                <li><a class="link" href="./rand_wheel.html">Колесо фортуны</a></li>
+                <li><a class="link" href="./rand_coin.html">Орел и Решка</a></li>
+                <li><a class="link" href="./rand_dice.html">Кости</a></li>
+            </ul>
+        </nav>
+    </header>
     
-            </header>
-            
-            <section class="wheel_section">
-            <fieldset class="ui-wheel-of-fortune">
-                <ul>
-                  <li>$1000</li>
-                  <li>$2000</li>
-                  <li>$3000</li>
-                  <li>$4000</li>
-                  <li>$5000</li>
-                  <li>$6000</li>
-                  <li>$7000</li>
-                  <li>$8000</li>
-                  <li>$9000</li>
-                  <li>$10000</li>
-                  <li>$11000</li>
-                  <li>$12000</li>
-                </ul>
-                <button type="button">SPIN</button>
-              </fieldset>
-            </section>
+    <section class="wheel_section">
+        <fieldset class="ui-wheel-of-fortune" id="wheelFortune">
+            <ul id="wheelList">
+                <!-- JS заполнит -->
+            </ul>
+            <button type="button" id="spinButton">КРУТИТЬ</button>
+        </fieldset>
+    </section>
 
-        
+    <!-- Редактор секторов -->
+    <div class="wheel-editor" style="max-width: 700px; margin: 40px auto; padding: 20px; background: #1a1e2c; border-radius: 30px;">
+        <h3 style="margin:0 0 15px; color:#fff;">✏️ Редактировать сектора</h3>
+        <div id="itemsEditor" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+            <!-- динамические поля -->
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button id="addItemBtn" class="button" style="margin:0;">➕ Добавить сектор</button>
+            <button id="removeLastBtn" class="button" style="margin:0; background:#b71c1c;">➖ Удалить последний</button>
+            <button id="resetWheelBtn" class="button" style="margin:0; background:#5d4a0e;">↺ Сбросить (12)</button>
+        </div>
+        <div id="spinResult" style="margin-top:20px; font-size:24px; text-align:center; color:#ffd966; min-height:3rem;"></div>
+    </div>
 
-        <footer>
-            <p>Контакты: Fiks.criper@gmail.com</p>
-        </footer>
+    <footer>
+        <p>Контакты: Fiks.criper@gmail.com</p>
+    </footer>
 
-
-        <script src="js/wheel.js"></script>
-    </body>
-
-        
- </html>
+    <script src="js/wheel.js"></script>
+</body>
+</html>
