@@ -7,6 +7,9 @@
   display: grid;
   position: relative;
   width: 40%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #195210; /* фон для 1 сектора, когда круг цельный */
 }
 .ui-wheel-of-fortune::after {
   aspect-ratio: 1 / cos(30deg);
@@ -39,29 +42,47 @@
 }
 .ui-wheel-of-fortune ul {
   all: unset;
-  clip-path: inset(0 0 0 0 round 50%);
-  display: grid;
+  display: block;
+  position: absolute;
   inset: 0;
-  place-content: center start;
   will-change: transform;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /* transform-origin задаётся в JS */
 }
 .ui-wheel-of-fortune li {
-  align-content: center;
-  aspect-ratio: 1 / calc(2 * tan(180deg / var(--_items)));
-  background: #195210;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  transform-origin: right center;
+  width: 50%; /* радиус колеса */
+  /* высота задаётся инлайн в JS */
   background: linear-gradient(90deg, rgba(25, 82, 16, 1) 0%, rgba(34, 133, 75, 1) 100%);
-  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-  display: grid;
-  font-size: 5cqi;
-  grid-area: 1 / -1;
-  padding-left: 1.5ch;
-  rotate: calc(360deg / var(--_items) * calc(var(--_idx) - 1));
-  transform-origin: center right;
-  user-select: none;
-  /* ширина будет задаваться динамически через style */
   color: white;
   text-shadow: 1px 1px 3px black;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 1.5ch;
+  font-size: 5cqi;
+  user-select: none;
+  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+}
+/* Для одного сектора clip-path не нужен */
+.ui-wheel-of-fortune li.single {
+  clip-path: none;
+  width: 100%;
+  right: 0;
+  top: 0;
+  height: 100%;
+  margin-top: 0;
+  transform: none;
+  border-radius: 50%;
+  justify-content: center;
+  padding-left: 0;
+  font-size: 8cqi;
 }
 
 * { box-sizing: border-box; }
@@ -74,7 +95,7 @@ body {
   justify-content: center;
 }
 
-/* Стили для редактора */
+/* Стили редактора */
 .wheel-editor .item-row {
   display: flex;
   align-items: center;
@@ -105,4 +126,85 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+
+    /* Сброс для fieldset */
+    .ui-wheel-of-fortune {
+        margin: 0;
+        padding: 0;
+        border: none;
+        min-width: 0;
+    }
+
+    /* Контейнер для колеса и редактора в одной строке */
+    .wheel-page {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 40px;
+        flex-wrap: wrap;
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Секция колеса */
+    .wheel-page .wheel_section {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: center;
+        width: auto;
+        min-width: 790px; /* увеличено */
+    }
+
+    /* Редактор */
+    .wheel-page .wheel-editor {
+        flex: 1 1 300px;
+        max-width: 400px;
+        min-width: 280px;
+        background: #1a1e2c;
+        border-radius: 30px;
+        padding: 20px;
+    }
+
+    /* Адаптивность: на узких экранах редактор снизу */
+    @media (max-width: 900px) {
+        .wheel-page {
+            flex-direction: column;
+            align-items: center;
+        }
+        .wheel-page .wheel_section {
+            min-width: 0;
+            width: 100%;
+            justify-content: center;
+        }
+        .wheel-page .wheel-editor {
+            width: 100%;
+            max-width: 500px;
+        }
+    }
+
+    /* Увеличенный размер колеса */
+    .ui-wheel-of-fortune {
+        width: 100%;   /* поверх 40% из wheel.css */
+        min-width: 500px;
+        aspect-ratio: 1 / 1;
+    }
+
+    @media (max-width: 600px) {
+        .ui-wheel-of-fortune {
+            width: 90% !important;
+            min-width: 320px;
+        }
+    }
+
+    /* Для двух секторов – полукруги */
+.ui-wheel-of-fortune li.half {
+  clip-path: none;
+  width: 50%;
+  height: 100%;
+  top: 0;
+  margin-top: 0;
+  /* текст можно оставить с отступом */
 }

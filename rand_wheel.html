@@ -29,27 +29,25 @@
         </nav>
     </header>
     
-    <section class="wheel_section">
-        <fieldset class="ui-wheel-of-fortune" id="wheelFortune">
-            <ul id="wheelList">
-                <!-- JS заполнит -->
-            </ul>
-            <button type="button" id="spinButton">КРУТИТЬ</button>
-        </fieldset>
-    </section>
+    <div class="wheel-page">
+        <section class="wheel_section">
+            <fieldset class="ui-wheel-of-fortune" id="wheelFortune">
+                <ul id="wheelList"></ul>
+                <button type="button" id="spinButton">КРУТИТЬ</button>
+            </fieldset>
+        </section>
 
-    <!-- Редактор секторов -->
-    <div class="wheel-editor" style="max-width: 700px; margin: 40px auto; padding: 20px; background: #1a1e2c; border-radius: 30px;">
-        <h3 style="margin:0 0 15px; color:#fff;">✏️ Редактировать сектора</h3>
-        <div id="itemsEditor" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
-            <!-- динамические поля -->
+        <div class="wheel-editor">
+            <h3 style="margin:0 0 15px; color:#fff;">✏️ Редактировать сектора</h3>
+            <div id="itemsEditor" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button id="addItemBtn" class="button" style="margin:0;">➕ Добавить сектор</button>
+                <button id="removeLastBtn" class="button" style="margin:0; background:#b71c1c;">➖ Удалить последний</button>
+                <button id="resetWheelBtn" class="button" style="margin:0; background:#5d4a0e;">↺ Сбросить (12)</button>
+            </div>
+            <div id="spinResult" style="margin-top:20px; font-size:24px; text-align:center; color:#ffd966; min-height:3rem;"></div>
         </div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button id="addItemBtn" class="button" style="margin:0;">➕ Добавить сектор</button>
-            <button id="removeLastBtn" class="button" style="margin:0; background:#b71c1c;">➖ Удалить последний</button>
-            <button id="resetWheelBtn" class="button" style="margin:0; background:#5d4a0e;">↺ Сбросить (12)</button>
-        </div>
-        <div id="spinResult" style="margin-top:20px; font-size:24px; text-align:center; color:#ffd966; min-height:3rem;"></div>
     </div>
 
     <footer>
