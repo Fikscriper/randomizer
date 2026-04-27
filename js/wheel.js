@@ -18,6 +18,12 @@ function wheelOfFortune(selector) {
     const DEFAULT_ITEMS = ['$1000', '$2000', '$3000', '$4000', '$5000', '$6000', '$7000', '$8000', '$9000', '$10000', '$11000', '$12000'];
     let currentItems = [...DEFAULT_ITEMS];
 
+    // Удалить класс winner со всех li
+    function clearWinner() {
+        const allLi = wheel.querySelectorAll('li');
+        allLi.forEach(li => li.classList.remove('winner'));
+    }
+
     function renderEditor() {
         editorDiv.innerHTML = '';
         currentItems.forEach((value, index) => {
@@ -29,6 +35,7 @@ function wheelOfFortune(selector) {
             input.value = value;
             input.addEventListener('input', (e) => {
                 currentItems[index] = e.target.value;
+                rebuildWheel(false);
             });
 
             const delBtn = document.createElement('button');
@@ -50,7 +57,7 @@ function wheelOfFortune(selector) {
         });
     }
 
-    function rebuildWheel() {
+    function rebuildWheel(resetResult = true) {
         const count = currentItems.length;
         container.style.setProperty('--_items', count);
 
@@ -61,18 +68,15 @@ function wheelOfFortune(selector) {
         wheel.style.transformOrigin = 'center center';
 
         if (count === 1) {
-            // Один сектор – цельный круг
             const li = document.createElement('li');
             li.textContent = currentItems[0];
             li.classList.add('single');
             wheel.appendChild(li);
         } else if (count === 2) {
-            // Два полукруга
             currentItems.forEach((text, idx) => {
                 const li = document.createElement('li');
                 li.textContent = text;
                 li.classList.add('half');
-                // Прямоугольник на всю высоту, шириной 50%, правый край в центре
                 li.style.width = '50%';
                 li.style.height = '100%';
                 li.style.marginTop = '0';
@@ -80,15 +84,8 @@ function wheelOfFortune(selector) {
                 wheel.appendChild(li);
             });
         } else {
-            // Три и более секторов – треугольники
-            let sectorHeight;
-            if (count === 2) {
-                // tan(90°) бесконечность, но этот блок не выполнится, оставлено для логики
-                sectorHeight = containerWidth * 2;
-            } else {
-                const angleRad = Math.PI / count;
-                sectorHeight = 2 * radius * Math.tan(angleRad);
-            }
+            const angleRad = Math.PI / count;
+            const sectorHeight = 2 * radius * Math.tan(angleRad);
 
             currentItems.forEach((text, idx) => {
                 const li = document.createElement('li');
@@ -101,13 +98,18 @@ function wheelOfFortune(selector) {
             });
         }
 
-        previousEndDegree = 0;
-        wheel.style.transform = `rotate(0deg)`;
-        if (animation) {
-            animation.cancel();
-            animation = null;
+        if (resetResult) {
+            previousEndDegree = 0;
+            wheel.style.transform = `rotate(0deg)`;
+            if (animation) {
+                animation.cancel();
+                animation = null;
+            }
+            resultDiv.textContent = '';
+            clearWinner(); // убираем подсветку
+        } else {
+            wheel.style.transform = `rotate(${previousEndDegree}deg)`;
         }
-        resultDiv.textContent = '';
     }
 
     function resetToDefault() {
@@ -137,7 +139,7 @@ function wheelOfFortune(selector) {
         addBtn.addEventListener('click', addItem);
         removeLastBtn.addEventListener('click', removeLastItem);
         resetBtn.addEventListener('click', resetToDefault);
-        window.addEventListener('resize', rebuildWheel);
+        window.addEventListener('resize', () => rebuildWheel(false));
     }
 
     spinBtn.addEventListener('click', () => {
@@ -147,6 +149,9 @@ function wheelOfFortune(selector) {
         if (animation) {
             animation.cancel();
         }
+
+        // Перед новым вращением убираем старую подсветку
+        clearWinner();
 
         const randomAdditionalDegrees = Math.random() * 360 + 1800;
         const newEndDegree = previousEndDegree + randomAdditionalDegrees;
@@ -165,10 +170,21 @@ function wheelOfFortune(selector) {
         animation.onfinish = () => {
             const finalAngle = newEndDegree % 360;
             const segmentAngle = 360 / items.length;
-            let normalizedAngle = (360 - finalAngle + segmentAngle / 2) % 360;
-            let index = Math.floor(normalizedAngle / segmentAngle) % items.length;
+
+            // Стрелка сверху (12 часов) → 90° в системе координат поворота
+            const targetAngle = (90 + segmentAngle / 2) % 360;
+            const adjustedAngle = (targetAngle - finalAngle + 360) % 360;
+            const index = Math.floor(adjustedAngle / segmentAngle) % items.length;
+
             const result = items[index];
             resultDiv.textContent = `🎉 Выпало: ${result} 🎉`;
+
+            // Подсветить выпавший сектор
+            const allLi = wheel.querySelectorAll('li');
+            if (allLi[index]) {
+                allLi[index].classList.add('winner');
+            }
+
             previousEndDegree = newEndDegree;
             animation = null;
         };

@@ -30,7 +30,7 @@
   border: 0;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 5cqi;
+  font-size: 3.8cqi;
   place-self: center;
   width: 20cqi;
   background: #195210;
@@ -207,4 +207,26 @@ body {
   top: 0;
   margin-top: 0;
   /* текст можно оставить с отступом */
+}
+
+/* Победный сектор с анимацией */
+.ui-wheel-of-fortune li.winner {
+  background: #ffd700;
+  background: linear-gradient(90deg, #ffb300 0%, #ffea00 100%);
+  color: #1a1a1a;
+  text-shadow: 0 0 5px rgba(255,255,255,0.8) ;
+  box-shadow: inset 0 0 25px rgba(255,215,0,0.7);
+  z-index: 1;
+  animation: winnerGlow 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes winnerGlow {
+  0% {
+      box-shadow: inset 0 0 20px rgba(255,215,0,0.7), 0 0 10px green;
+      background: #ffd700;
+  }
+  100% {
+      box-shadow: inset 0 0 35px rgba(255,215,0,1), 0 0 25px gold;
+      background: #ffea00;
+  }
 }
