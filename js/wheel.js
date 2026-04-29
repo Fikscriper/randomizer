@@ -15,10 +15,9 @@ function wheelOfFortune(selector) {
     const resetBtn = document.getElementById('resetWheelBtn');
     const resultDiv = document.getElementById('spinResult');
 
-    const DEFAULT_ITEMS = ['$1000', '$2000', '$3000', '$4000', '$5000', '$6000', '$7000', '$8000', '$9000', '$10000', '$11000', '$12000'];
+    const DEFAULT_ITEMS = ['1', '2', '3', '4', '5'];
     let currentItems = [...DEFAULT_ITEMS];
 
-    // Удалить класс winner со всех li
     function clearWinner() {
         const allLi = wheel.querySelectorAll('li');
         allLi.forEach(li => li.classList.remove('winner'));
@@ -171,7 +170,6 @@ function wheelOfFortune(selector) {
             const finalAngle = newEndDegree % 360;
             const segmentAngle = 360 / items.length;
 
-            // Стрелка сверху (12 часов) → 90° в системе координат поворота
             const targetAngle = (90 + segmentAngle / 2) % 360;
             const adjustedAngle = (targetAngle - finalAngle + 360) % 360;
             const index = Math.floor(adjustedAngle / segmentAngle) % items.length;
