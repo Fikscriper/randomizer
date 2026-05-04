@@ -11,7 +11,6 @@ function wheelOfFortune(selector) {
 
     const editorDiv = document.getElementById('itemsEditor');
     const addBtn = document.getElementById('addItemBtn');
-    const removeLastBtn = document.getElementById('removeLastBtn');
     const resetBtn = document.getElementById('resetWheelBtn');
     const resultDiv = document.getElementById('spinResult');
 
@@ -71,7 +70,8 @@ function wheelOfFortune(selector) {
             li.textContent = currentItems[0];
             li.classList.add('single');
             wheel.appendChild(li);
-        } else if (count === 2) {
+        } else
+        if (count === 2) {
             currentItems.forEach((text, idx) => {
                 const li = document.createElement('li');
                 li.textContent = text;
@@ -105,7 +105,7 @@ function wheelOfFortune(selector) {
                 animation = null;
             }
             resultDiv.textContent = '';
-            clearWinner(); // убираем подсветку
+            clearWinner();
         } else {
             wheel.style.transform = `rotate(${previousEndDegree}deg)`;
         }
@@ -118,17 +118,7 @@ function wheelOfFortune(selector) {
     }
 
     function addItem() {
-        currentItems.push('Новое');
-        renderEditor();
-        rebuildWheel();
-    }
-
-    function removeLastItem() {
-        if (currentItems.length <= 1) {
-            alert('Должен остаться хотя бы один сектор.');
-            return;
-        }
-        currentItems.pop();
+        currentItems.push('New');
         renderEditor();
         rebuildWheel();
     }
@@ -136,21 +126,18 @@ function wheelOfFortune(selector) {
     function init() {
         resetToDefault();
         addBtn.addEventListener('click', addItem);
-        removeLastBtn.addEventListener('click', removeLastItem);
         resetBtn.addEventListener('click', resetToDefault);
         window.addEventListener('resize', () => rebuildWheel(false));
     }
 
     spinBtn.addEventListener('click', () => {
         const items = currentItems;
-        if (items.length === 0) return;
 
         if (animation) {
             animation.cancel();
         }
-
-        // Перед новым вращением убираем старую подсветку
         clearWinner();
+
 
         const randomAdditionalDegrees = Math.random() * 360 + 1800;
         const newEndDegree = previousEndDegree + randomAdditionalDegrees;
@@ -177,7 +164,6 @@ function wheelOfFortune(selector) {
             const result = items[index];
             resultDiv.textContent = `🎉 Выпало: ${result} 🎉`;
 
-            // Подсветить выпавший сектор
             const allLi = wheel.querySelectorAll('li');
             if (allLi[index]) {
                 allLi[index].classList.add('winner');
