@@ -1,5 +1,6 @@
 .coin {
     transition: transform 0.1s linear;
+    margin: 50px;
 }
 
 .coin-tossing {
