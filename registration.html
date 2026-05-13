@@ -1,54 +1,216 @@
 <!DOCTYPE html>
-    <html lang = "ru">
-        <head>
-            <link rel="stylesheet" href="./statuse/collorized.css">
-            <link rel="stylesheet" href="./statuse/global.css">
-            <link rel="stylesheet" href="./statuse/burger_menu.css">   
-            <link rel="stylesheet" href="./statuse/menu.css">
-            
-            <title>Main</title>
-        </head>
-      
-        <body class="main">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация / Профиль</title>
+    <!-- Основные стили из statuse -->
+    <link rel="stylesheet" href="statuse/global.css">
+    <link rel="stylesheet" href="statuse/menu.css">
+    <link rel="stylesheet" href="statuse/burger_menu.css">
+    <link rel="stylesheet" href="statuse/collorized.css">
+    <!-- Дополнительные стили специально для форм -->
+    <style>
+        .auth-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            padding: 20px;
+        }
 
-            <header style="padding: 50px;">
-                <input id="burger" type="checkbox" />
-                <label for="burger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>
-                
-            <nav style="display:block;">
-                <a href="./registration.html" id="accaunt" class="icon-link"><img src="./images/profile-icon.png" class="icon"></a>
-                <a href="./main.html" class="link-real_main">Main</a>
-                
-                <ul>
-                    <li><a class="link-real" href="./rand_num.html">Рандомайзер чисел</a></li>
-                    <li><a class="link-real" href="./rand_wheel.html">Колесо фартуны</a></li>
-                    <li><a class="link-real" href="./rand_coin.html">Орел и Решка</a></li>
-                    <li><a class="link-real" href="./rand_dice.html">Кости</a></li>
-                </ul>
-            </nav>
-    
-            </header>
+        .auth-box {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            color: white;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
 
-            <section class="section_menus">
-            <div class="menus">
-                <h1>Заригестрируйтесь</h1>
+        .auth-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
 
-                <div class="list">
-                    <a class="link" href="./rand_num.html">Рандомайзер чисел</a>
-                    <a class="link" href="./rand_wheel.html">Колесо фартуны</a>
-                    <a class="link" href="./rand_coin.html">Орел и Решка</a>
-                    <a class="link" href="./rand_dice.html">Кости</a>
-                </div>
-            </div>
-            </section>
+        .auth-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .auth-tab {
+            padding: 8px 25px;
+            border: 2px solid cyan;
+            background: transparent;
+            color: cyan;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .auth-tab.active {
+            background: cyan;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .auth-form {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .auth-form.active {
+            display: flex;
+        }
+
+        .auth-form input {
+            padding: 12px;
+            border: 2px solid cyan;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .auth-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .auth-form button {
+            padding: 12px;
+            background: cyan;
+            border: none;
+            border-radius: 10px;
+            color: #000;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .auth-form button:hover {
+            background: #00bcd4;
+            box-shadow: 0 0 20px cyan;
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            font-size: 14px;
+            text-align: center;
+            min-height: 20px;
+        }
+
+        .profile-box {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-box.active {
+            display: flex;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: cyan;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: #000;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .logout-btn {
+            padding: 10px 30px;
+            background: #ff4d4d;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #cc0000;
+            box-shadow: 0 0 15px #ff4d4d;
+        }
+    </style>
+</head>
+<body class="main">
+    <header style="padding: 50px;">
+        <input id="burger" type="checkbox" />
+        <label for="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
         
+    <nav style="display:block;">
+        <a href="./registration.html" id="accaunt" class="icon-link"><img src="./images/profile-icon.png" class="icon"></a>
+        <a href="./main.html" class="link-real_main">Main</a>
+        
+        <ul>
+            <li><a class="link-real" href="./rand_num.html">Рандомайзер чисел</a></li>
+            <li><a class="link-real" href="./rand_wheel.html">Колесо фартуны</a></li>
+            <li><a class="link-real" href="./rand_coin.html">Орел и Решка</a></li>
+            <li><a class="link-real" href="./rand_dice.html">Кости</a></li>
+        </ul>
+    </nav>
 
-        <footer>
-            <p>Контакты: Fiks.criper@gmail.com</p>
-        </footer>
-        </body>
- </html>
+    </header>
+
+    <main class="auth-wrapper">
+        <div class="auth-box">
+            <!-- Блок для неавторизованного пользователя -->
+            <div id="authBlock">
+                <h2>Добро пожаловать</h2>
+                <div class="auth-tabs">
+                    <button class="auth-tab active" id="tabLogin">Вход</button>
+                    <button class="auth-tab" id="tabRegister">Регистрация</button>
+                </div>
+
+                <!-- Форма входа -->
+                <form class="auth-form active" id="loginForm">
+                    <input type="text" id="loginUsername" placeholder="Логин" required>
+                    <input type="password" id="loginPassword" placeholder="Пароль" required>
+                    <div class="error-message" id="loginError"></div>
+                    <button type="submit">Войти</button>
+                </form>
+
+                <!-- Форма регистрации -->
+                <form class="auth-form" id="registerForm">
+                    <input type="text" id="regUsername" placeholder="Придумайте логин" required>
+                    <input type="password" id="regPassword" placeholder="Пароль" required>
+                    <input type="password" id="regPasswordConfirm" placeholder="Повторите пароль" required>
+                    <div class="error-message" id="regError"></div>
+                    <button type="submit">Зарегистрироваться</button>
+                </form>
+            </div>
+
+            <!-- Блок профиля (скрыт по умолчанию) -->
+            <div id="profileBlock" class="profile-box">
+                <div class="profile-avatar" id="profileAvatar"></div>
+                <h2 id="profileName"></h2>
+                <button class="logout-btn" id="logoutBtn">Выйти</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/regist.js"></script>
+</body>
+</html>
